@@ -1,0 +1,21 @@
+import requests
+
+# Weather API (τρέχων καιρός)
+
+def current_weather(lat, lon):
+    current_weather_url = (
+        "https://api.open-meteo.com/v1/forecast"
+        f"?latitude={lat}&longitude={lon}"
+        "&current_weather=true"
+    )
+    return requests.get(current_weather_url).json()
+
+# Air Quality API (ποιότητα αέρα)
+
+def air_quality(lat, lon):
+    air_quality_url = (
+        "https://air-quality-api.open-meteo.com/v1/air-quality"
+        f"?latitude={lat}&longitude={lon}"
+        "&hourly=pm10,pm2_5"
+    )
+    return requests.get(air_quality_url).json()

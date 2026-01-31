@@ -1,0 +1,20 @@
+import pandas as pd
+
+from extract import current_weather, air_quality
+from transform import transform_weather_data
+from load import load_to_db
+
+cities = [
+    {"city": "Athens", "lat": 37.9838, "lon": 23.7275},
+    {"city": "London", "lat": 51.5074, "lon": -0.1278},
+    {"city": "New York", "lat": 40.7128, "lon": -74.0060},
+    {"city": "Tokyo", "lat": 35.6895, "lon": 139.6917},
+    {"city": "Sydney", "lat": -33.8688, "lon": 151.2093},
+]
+
+for city in cities:
+    weather = current_weather(city["lat"], city["lon"])
+    air = air_quality(city["lat"], city["lon"])
+    record = transform_weather_data(city, weather, air)
+    
+print("Weather pipeline run completed.")
